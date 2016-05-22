@@ -1,8 +1,9 @@
 " use strict ";
 
 var phoneEntry = [];
-phoneEntry["min"] = 222;
-phoneEntry["joe"] = 333;
+var phoneNumbers = []
+phoneEntry["min"] = [5555,6666];
+phoneEntry["joe"] = [1111,2222];
 
 function PhoneBook(){
 
@@ -17,7 +18,7 @@ function listAllNames() {
   display.innerHTML = output;
 };
 
-function listAllNumbers() {
+function listAllNumbers(){
   var output = "";
   for(var i in phoneEntry){
     output+= phoneEntry[i] + "<br/>"
@@ -35,16 +36,35 @@ function listAllEntries(){
   // code to list all entries
 }
 
-function showAdd() {
+function showAdd(){
   var name = prompt("Enter full name");
   var number = prompt("Enter phone number");
-  phoneEntry[name] = number;
+  phoneEntry[name].push(number);
 };
 
-function showRemove() {
+function showAddEntry(){
+  var name = prompt("Enter full name");
+  var number = prompt("Enter phone number");
+  phoneEntry[name] = [];
+  phoneEntry[name].push(number);
+};
+
+function showRemoveRecord() {
   var remove = prompt("Enter name to remove");
   delete phoneEntry[remove];
 };
+function showRemoveNumber() {
+  var remove = prompt("Enter a number to remove");
+  var index;
+  for(var i in phoneEntry){
+    for(j = 0; j < phoneEntry[i].length; j++){
+      if(phoneEntry[i][j]==remove){
+        phoneEntry[i].splice(index,1);
+      }
+    }
+  }
+};
+
 
 function showLookup() {
   var lookup = prompt("Enter name to lookup");
@@ -58,8 +78,11 @@ function reverseLookup() {
   var lookup = prompt("Enter a number to lookup");
   var output = "";
   for(var i in phoneEntry){
-    if(phoneEntry[i]==lookup)
-      output = i;
+    for(j = 0; j < phoneEntry[i].length; j++){
+      if(phoneEntry[i][j]==lookup){
+        output = i;
+      }
+    }
   }
   if(output!="")
     display.innerHTML = output;
