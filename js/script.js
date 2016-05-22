@@ -54,4 +54,17 @@ function showLookup() {
     display.innerHTML = "That name is not found";
 };
 
+function reverseLookup() {
+  var lookup = prompt("Enter a number to lookup");
+  var output = "";
+  for(var i in phoneEntry){
+    if(phoneEntry[i]==lookup)
+      output = i;
+  }
+  if(output!="")
+    display.innerHTML = output;
+  else
+    display.innerHTML = "That number is not found";
+};
+
 var display = document.getElementById("display");
